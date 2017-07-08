@@ -31,7 +31,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="alert alert-success" role="alert">
                                 Operation successful for "{{ convert_input }}"! <br>
-                                <strong>Result number</strong> {{ convert_result }}
+                                <strong>Result number:</strong> {{ convert_result }}
                             </div>
                         </div>
                     {% endif %}
@@ -60,7 +60,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="alert alert-success" role="alert">
                                 Operation successful for "{{ decrypt_input }}"! <br>
-                                <strong>Result number</strong> {{ decrypt_result }}
+                                <strong>Decrypted city name:</strong> {{ decrypt_result }}
                             </div>
                         </div>
                     {% endif %}
@@ -78,7 +78,25 @@
             <div class="row">
                 <div class="col-md-8 col-sm-12">
                     <h3>How does it work?</h3>
-                    <p>Lorem ipsum et cetera</p>
+                    <p>
+                        Converter generates unique number for given city name. Process is reversible, so
+                        it can be decoded using the Decryptor.
+                        The Converter uses quite naive approach.<br>
+                        <ul>
+                           <li>Convert all letters to corresponding ascii numbers</li>
+                           <li>
+                               Since only lowercase letters are handled, most of the letters have 3-digit representation.
+                               Two digit letters are handled by adding prefixes in the following manner:
+                               <ul>
+                                   <li>add '-' if placed at the beginning,</li>
+                                   <li>add '0' if in the middle.</li>
+                               </ul>
+                           </li>
+                           <li>Concatenate the resulting string of numbers</li>
+                        </ul>
+                        This ensures that each unique name will have it's unique representation.
+                        Decrypting such number is just the above process reversed.
+                    </p>
                 </div>
             </div>
         </section>

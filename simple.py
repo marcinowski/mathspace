@@ -21,29 +21,53 @@ def main():
     if request.method == 'POST':
         name = request.form.get('city', '')
         if name:
-            return _handle_name(name)
+            return ConvertPostHandler.handle(name)
         number = request.form.get('number', '')
         if number:
-            print(type(number))
-            return _handle_number(number)
+            return DecryptPostHandler.handle(number)
     return render_template('simple_main.html')
 
 
-def _handle_name(name):
-    try:
-        name = name.strip()
-        c = ConvertCityName(name)
-        number = c.parse()
-        return render_template('simple_main.html', converted=True, convert_input=name, convert_result=number)
-    except WrongNameFormat as e:
-        return render_template('simple_main.html', convert_error=True, convert_error_info=e)
+class PostRequestHandler(object):
+    """ Common class for request handling """
+    parser = None
+    exception = None
+    prefix = ''
+    template = 'simple_main.html'
+
+    @classmethod
+    def handle(cls, value):
+        try:
+            name = value.strip()
+            c = cls.parser(value)
+            result = c.parse()
+            return render_template(cls.template, **cls._get_success_kwargs(name, result))
+        except cls.exception as e:
+            return render_template(cls.template, **cls._get_error_kwargs(e))
+
+    @classmethod
+    def _get_success_kwargs(cls, value, result):
+        return {
+            cls.prefix + 'ed': True,
+            cls.prefix + '_input': value,
+            cls.prefix + '_result': result
+        }
+
+    @classmethod
+    def _get_error_kwargs(cls, exc):
+        return {
+            cls.prefix + '_error': True,
+            cls.prefix + '_error_info': exc
+        }
 
 
-def _handle_number(number):
-    try:
-        number = number.strip()
-        c = DecryptCityNumber(number)
-        name = c.parse()
-        return render_template('simple_main.html', decrypted=True, decrypt_input=number, decrypt_result=name)
-    except WrongNumberFormat as e:
-        return render_template('simple_main.html', decrypt_error=True, decrypt_error_info=e)
+class ConvertPostHandler(PostRequestHandler):
+    parser = ConvertCityName
+    exception = WrongNameFormat
+    prefix = 'convert'
+
+
+class DecryptPostHandler(PostRequestHandler):
+    parser = DecryptCityNumber
+    exception = WrongNumberFormat
+    prefix = 'decrypt'
