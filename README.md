@@ -1,4 +1,4 @@
-#City name converter
+# City name converter
 
 `City name converter` is a simple application written in Python with web layer written in Flask.
 In order to launch it in your browser, follow these steps:
@@ -19,7 +19,7 @@ or
     python -m decryptor <city-number>
 in your command shell
 
-##How does it work
+## How does it work
 Converter generates unique number for given city name. Process is reversible, so
 it can be decoded using the Decryptor.
 The Converter uses quite naive approach:
@@ -35,9 +35,9 @@ The Converter uses quite naive approach:
 This ensures that each unique name will have it's unique representation.
 Decrypting such number is just the above process reversed.
 
-##Why flask?
+## Why flask?
 Django is too heavy for such a simple one-page application, I just wanted to provide simple routing and 
 requests handling.
 
-##Unittests
+## Unittests
 In order to run tests run `python -m unittest test.py`
