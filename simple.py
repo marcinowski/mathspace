@@ -6,6 +6,10 @@
 """
 
 from flask import Flask, render_template, request, url_for
+
+from city_name import ConvertCityName, WrongNameFormat
+
+
 app = Flask(__name__)
 
 
@@ -16,16 +20,9 @@ def hello_world():
     if request.method == 'POST':
         try:
             name = request.form.get('city', '')
-            number = ConvertCityName().convert(name)
+            converter = ConvertCityName(name)
+            number = converter.convert()
             return render_template('simple_main.html', results=True, number=number)
-        except Exception as e:
+        except WrongNameFormat as e:
             return render_template('simple_main.html', error=True, reason=e)
     return render_template('simple_main.html')
-
-
-class ConvertCityName(object):
-    def __init__(self):
-        pass
-
-    def convert(self, name):
-        return name
