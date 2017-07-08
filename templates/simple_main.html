@@ -16,10 +16,10 @@
     <div class="col-md-10 col-md-offset-1 col-sm-12">
         <div class="container city-box">
             <h1 class="page-header">City name converter</h1>
-            <section id="form-result">
+            <section id="converter">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <form method="post" action="">
+                        <form method="post" action="/">
                             <div class="form-group">
                                 <label for="city">Provide the name of the city</label>
                                 <input id="city" class="form-control" name="city" type="text" required>
@@ -27,18 +27,47 @@
                             <button class="btn btn-success" type="submit">Submit</button>
                         </form>
                     </div>
-                    {% if results %}
+                    {% if converted %}
                         <div class="col-md-6 col-sm-12">
                             <div class="alert alert-success" role="alert">
-                                Operation successful! <br>
-                                <strong>Result number</strong> {{ number }}
+                                Operation successful for "{{ convert_input }}"! <br>
+                                <strong>Result number</strong> {{ convert_result }}
                             </div>
                         </div>
                     {% endif %}
-                    {% if error %}
+                    {% if convert_error %}
                         <div class="col-md-6 col-sm-12">
                             <div class="alert alert-danger" role="alert">
-                                <strong>Operation Error!</strong> {{ reason }}
+                                <strong>Operation Error!</strong> {{ convert_error_info }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
+            <h1 class="page-header">City number decryptor</h1>
+            <section id="decryptor">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <form method="post" action="/">
+                            <div class="form-group">
+                                <label for="number">Provide the number</label>
+                                <input id="number" class="form-control" name="number" type="text" required>
+                            </div>
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </form>
+                    </div>
+                    {% if decrypted %}
+                        <div class="col-md-6 col-sm-12">
+                            <div class="alert alert-success" role="alert">
+                                Operation successful for {{ decrypt_input }}! <br>
+                                <strong>Result number</strong> {{ decrypt_result }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if decrypt_error %}
+                        <div class="col-md-6 col-sm-12">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Operation Error!</strong> {{ decrypt_error_info }}
                             </div>
                         </div>
                     {% endif %}
