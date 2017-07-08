@@ -4,13 +4,55 @@
     <meta charset="UTF-8">
     <title>Hi there!</title>
     <link rel="stylesheet" href="static/bootstrap.min.css">
+    <style>
+        .city-box {
+            border: 1px solid black;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="jumbotron">
-        <form method="post" action="">
-            <input name="city" type="text" required>
-            <button class="btn btn-success" type="submit">Submit</button>
-        </form>
+    <div class="col-md-10 col-md-offset-1 col-sm-12">
+        <div class="container city-box">
+            <h1 class="page-header">City name converter</h1>
+            <section id="form-result">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <form method="post" action="">
+                            <div class="form-group">
+                                <label for="city">Provide the name of the city</label>
+                                <input id="city" class="form-control" name="city" type="text" required>
+                            </div>
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </form>
+                    </div>
+                    {% if results %}
+                        <div class="col-md-6 col-sm-12">
+                            <div class="alert alert-success" role="alert">
+                                Operation successful! <br>
+                                <strong>Result number</strong> {{ number }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if error %}
+                        <div class="col-md-6 col-sm-12">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Operation Error!</strong> {{ reason }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+        <section id="how-to">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <h3>How does it work?</h3>
+                    <p>Lorem ipsum et cetera</p>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
