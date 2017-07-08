@@ -10,15 +10,27 @@ class WrongNameFormat(Exception):
     """"""
 
 
-class ConvertCityName(object):
+class BaseConvertClass(object):
+    """ Abstract class for i/o operations """
+    def __init__(self, value):
+        self.value = self._validate_input(value)
+        self.result = None
+
+    def parse(self):
+        """ Public method for input parsing """
+        raise NotImplemented
+
+    @staticmethod
+    def _validate_input(value):
+        """ Method for input validation """
+        raise NotImplemented
+
+
+class ConvertCityName(BaseConvertClass):
     """
     Class for validating an input name and converting it into unique number.
     """
-    def __init__(self, name):
-        self.name = self._validate_name(name)
-        self.result = None
-
-    def convert(self):
+    def parse(self):
         """
         Simple string converting using naive approach that every lowercase ASCII character
         has it's numeric representation. Additionally, most of the lowercase characters (that are handled here)
@@ -28,7 +40,7 @@ class ConvertCityName(object):
         :return: Numeric representation of a string as a string
         :rtype: str
         """
-        str_ord_map = map(lambda x: self._get_number_repr(x), self.name)
+        str_ord_map = map(lambda x: self._get_number_repr(x), self.value)
         self.result = ''.join(str_ord_map)
         self._adjust_first_char()
         return self.result
@@ -49,7 +61,7 @@ class ConvertCityName(object):
             self.result = self.result.replace('0', '-', 1)
 
     @staticmethod
-    def _validate_name(name):
+    def _validate_input(name):
         """
         Name values cannot be:
             - empty strings or None

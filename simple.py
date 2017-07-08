@@ -8,6 +8,7 @@
 from flask import Flask, render_template, request, url_for
 
 from .converter import ConvertCityName, WrongNameFormat
+from .decryptor import DecryptCityNumber, WrongNumberFormat
 
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ def main():
             return _handle_name(name)
         number = request.form.get('number', '')
         if number:
+            print(type(number))
             return _handle_number(number)
     return render_template('simple_main.html')
 
@@ -30,7 +32,7 @@ def main():
 def _handle_name(name):
     try:
         c = ConvertCityName(name)
-        number = c.convert()
+        number = c.parse()
         return render_template('simple_main.html', converted=True, convert_input=name, convert_result=number)
     except WrongNameFormat as e:
         return render_template('simple_main.html', convert_error=True, convert_error_info=e)
@@ -38,8 +40,8 @@ def _handle_name(name):
 
 def _handle_number(number):
     try:
-        c = ConvertCityName(number)
-        name = c.convert()
+        c = DecryptCityNumber(number)
+        name = c.parse()
         return render_template('simple_main.html', decrypted=True, decrypt_input=number, decrypt_result=name)
-    except WrongNameFormat as e:
+    except WrongNumberFormat as e:
         return render_template('simple_main.html', decrypt_error=True, decrypt_error_info=e)
