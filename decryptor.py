@@ -4,7 +4,7 @@
 :author: Marcin Muszynski
 :contact: marcinowski007@gmail.com
 """
-from .converter import BaseConvertClass
+from converter import BaseConvertClass
 
 
 class WrongNumberFormat(Exception):
@@ -34,10 +34,10 @@ class DecryptCityNumber(BaseConvertClass):
 
     @staticmethod
     def _validate_input(value):
-        if len(value) % 3:
-            raise WrongNumberFormat('Wrong number format. Should contain 3n characters.')
         if not isinstance(value, str):
             raise WrongNumberFormat('Only string format is supported.')
+        if len(value) % 3:
+            raise WrongNumberFormat('Wrong number format. Should contain 3n characters.')
         return value
 
 
