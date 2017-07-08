@@ -1,3 +1,10 @@
+"""
+:created on: 2017-07-08
+
+:author: Marcin Muszynski
+:contact: marcinowski007@gmail.com
+"""
+
 from flask import Flask, render_template, request, url_for
 app = Flask(__name__)
 
