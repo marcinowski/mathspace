@@ -11,7 +11,13 @@ In order to launch it in your browser, follow these steps:
     `set FLASK_APP=simple.py` on Windows
 4. Run `flask run` - this starts local server with application, that you can access on `localhost:8000`
 
-Besides you can run `python -m converter <city-name>` or `python -m decryptor <city-number>` in your command shell
+Besides you can run from `src` path
+
+    python -m converter <city-name>
+or 
+
+    python -m decryptor <city-number>
+in your command shell
 
 ##How does it work
 Converter generates unique number for given city name. Process is reversible, so

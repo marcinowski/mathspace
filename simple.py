@@ -7,8 +7,8 @@
 
 from flask import Flask, render_template, request, url_for
 
-from .converter import ConvertCityName, WrongNameFormat
-from .decryptor import DecryptCityNumber, WrongNumberFormat
+from src.converter import ConvertCityName, WrongNameFormat
+from src.decryptor import DecryptCityNumber, WrongNumberFormat
 
 
 app = Flask(__name__)
