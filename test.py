@@ -4,6 +4,7 @@
 :author: Marcin Muszynski
 :contact: marcinowski007@gmail.com
 """
+
 from unittest import TestCase
 
 from converter import ConvertCityName, WrongNameFormat

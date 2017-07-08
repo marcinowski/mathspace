@@ -81,3 +81,11 @@ class ConvertCityName(BaseConvertClass):
         if lower != name:
             raise WrongNameFormat('Name must be all lowercase. Try "{}" instead.'.format(lower))
         return name
+
+
+if __name__ == '__main__':
+    import sys
+    name = sys.argv[1].strip()
+    result = ConvertCityName(sys.argv[1]).parse()
+    print('City name to convert: {}'.format(name))
+    print('Result: {}'.format(result))

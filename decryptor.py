@@ -39,3 +39,11 @@ class DecryptCityNumber(BaseConvertClass):
         if not isinstance(value, str):
             raise WrongNumberFormat('Only string format is supported.')
         return value
+
+
+if __name__ == '__main__':
+    import sys
+    number = sys.argv[1].strip()
+    result = DecryptCityNumber(sys.argv[1]).parse()
+    print('Number to decrypt: {}'.format(number))
+    print('Result: {}'.format(result))
