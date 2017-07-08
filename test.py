@@ -6,7 +6,7 @@
 """
 from unittest import TestCase
 
-from simple import ConvertCityName, WrongNameFormat
+from converter import ConvertCityName, WrongNameFormat
 
 
 class TestConvertWrongCityName(TestCase):
@@ -44,3 +44,8 @@ class TestConvertCityName(TestCase):
         """ a, b & c as 2 digit numbers should be followed by 0 """
         c = ConvertCityName('eaebece').convert()
         self.assertEqual(c, '101097101098101099101')
+
+    def test_space(self):
+        """ Test for space handling """
+        c = ConvertCityName('e e').convert()
+        self.assertEqual(c, '101032101')
