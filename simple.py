@@ -31,6 +31,7 @@ def main():
 
 def _handle_name(name):
     try:
+        name = name.strip()
         c = ConvertCityName(name)
         number = c.parse()
         return render_template('simple_main.html', converted=True, convert_input=name, convert_result=number)
@@ -40,6 +41,7 @@ def _handle_name(name):
 
 def _handle_number(number):
     try:
+        number = number.strip()
         c = DecryptCityNumber(number)
         name = c.parse()
         return render_template('simple_main.html', decrypted=True, decrypt_input=number, decrypt_result=name)

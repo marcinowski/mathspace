@@ -23,7 +23,6 @@ class DecryptCityNumber(BaseConvertClass):
         :rtype: str
         """
         list_of_chr = [self._clear_two_digits(self.value[i:i + 3]) for i in range(0, len(self.value), 3)]
-        print(list_of_chr)
         self.result = ''.join(map(lambda x: chr(int(x)), list_of_chr))
         return self.result
 
@@ -35,8 +34,8 @@ class DecryptCityNumber(BaseConvertClass):
 
     @staticmethod
     def _validate_input(value):
-        if not len(value) % 3:
+        if len(value) % 3:
             raise WrongNumberFormat('Wrong number format. Should contain 3n characters.')
         if not isinstance(value, str):
             raise WrongNumberFormat('Only string format is supported.')
-        return value.strip()
+        return value
